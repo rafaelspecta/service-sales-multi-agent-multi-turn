@@ -1,0 +1,9 @@
+pydantic
+crewai
+crewai-tools
+langfuse
+openinference-instrumentation-crewai
+openinference-instrumentation-litellm
+openlit
+fastapi[standard]
+dotenv
