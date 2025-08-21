@@ -29,6 +29,12 @@ Access: http://localhost:3000
 
 Starting from the root folder
 
+1) Create .env file based on the sample version. There is no need to change any env var on this file.
+```
+cp env-sample .env
+```
+
+2) Start the containers
 ```
 docker compose up -d
 ```
@@ -45,7 +51,7 @@ cd crewai
 
 1) Create .env file based on the sample version and fill the variables
 ```
-cp env-file .env
+cp env-sample .env
 ```
 
 2) Create the environment
