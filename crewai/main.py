@@ -161,7 +161,7 @@ def run_multi_turn(chat_id: str, user_input: str) -> str:
 
     # Wire Langfuse session
     try:
-        langfuse.update_current_trace(session_id=session["trace_id"])
+        langfuse.update_current_trace(session_id=session["trace_id"],user_id=chat_id)
     except Exception as e:
         print(f"Langfuse update_current_trace failed: {e}")
 
@@ -220,6 +220,7 @@ class EvolutionWebhookRequest(RootModel[Dict[str, Any]]):
     pass
 
 @app.post("/webhook/evolution")
+@observe(name="New chat message")
 async def evolution_webhook(req: Request):
     try:
         body = await req.json()
@@ -264,6 +265,11 @@ async def evolution_webhook(req: Request):
         #             f"Summary/Situation:\n sample summary"
         #         )
         #     )
+
+        langfuse.update_current_trace(
+            input=user_msg,
+            output=reply_text
+        )
     elif user_msg.startswith("Sales Agent:"):
         print("Ignoring Supervisor message")
     else:
