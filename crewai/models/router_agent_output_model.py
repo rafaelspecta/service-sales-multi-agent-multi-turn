@@ -1,17 +1,16 @@
 from pydantic import BaseModel, field_validator
-from typing import Literal, Dict, Any
+from typing import Literal, Dict, Any, Optional
 
 # TODO: Extract the valid agent names as a Literal
-ValidAgent = Literal["Pricing Agent", "Payment Agent", "Scheduling Agent"]
+ValidAgent = Literal["Pricing Agent", "Payment Agent", "Scheduling Agent", "None"]
 
 # Define the Pydantic model
 class RouterAgentOutput(BaseModel):
-    next_agent: ValidAgent
-    task: str
-    context: Dict[str, Any]
-    speak: str
+    next_agent: Optional[ValidAgent] = None
+    task: Optional[str] = None
+    context: Dict[str, Any] = {}  # default empty dict
+    speak: Optional[str] = None
 
-    # Optional: custom validator to enforce any extra rules
     @field_validator("task")
     def task_must_not_be_empty(cls, v):
         if not v.strip():

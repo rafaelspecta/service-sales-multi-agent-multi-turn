@@ -1,9 +1,9 @@
 import json
 import os
 from crewai.tools import tool
-from whatsapp.whatsapp import send_evolution_text
 
-SALES_AGENT_PHONE_NUMBER = os.getenv("SALES_AGENT_PHONE_NUMBER")
+from config.settings import SALES_AGENT_PHONE_NUMBER
+from services.evolution import send_evolution_text
 
 @tool("escalate_to_human")
 def escalate_to_human(payload: str) -> str:

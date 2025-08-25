@@ -1,10 +1,7 @@
-import os
 import requests
 from typing import Dict, Any, Optional
 
-EVOLUTION_API_URL = os.getenv("EVOLUTION_API_URL")
-EVOLUTION_INSTANCE_ID = os.getenv("EVOLUTION_INSTANCE_ID")
-EVOLUTION_API_KEY = os.getenv("EVOLUTION_API_KEY")  # header 'apikey'
+from config.settings import EVOLUTION_API_URL, EVOLUTION_INSTANCE_ID, EVOLUTION_API_KEY
 
 def parse_evolution_event(body: Dict[str, Any]) -> Optional[Dict[str, str]]:
     """
